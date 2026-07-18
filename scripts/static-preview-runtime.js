@@ -1,4 +1,12 @@
 (() => {
+  const main = document.querySelector("main");
+  if (main) {
+    main.addEventListener("pointermove", (event) => {
+      main.style.setProperty("--site-cursor-x", `${event.clientX}px`);
+      main.style.setProperty("--site-cursor-y", `${event.clientY}px`);
+    });
+  }
+
   const revealNodes = [...document.querySelectorAll("[data-reveal]")];
   const sectionIndexes = new Map();
   revealNodes.forEach((node) => {
