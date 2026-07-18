@@ -426,7 +426,7 @@ export default function Home() {
         </div>
       </header>
 
-      <section className="hero">
+      <section className="hero" id="hero" data-section="hero">
         <div className="hero-copy" data-reveal>
           <p className="eyebrow">Geospatial AI platform</p>
           <h1>Detect and count anything from the sky</h1>
@@ -455,7 +455,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="platform-section ruled-section" id="platform">
+      <section className="platform-section ruled-section" id="platform" data-section="platform">
         <div className="section-number">FlyPix / Platform</div>
         <div className="platform-frame" data-reveal><img src="/assets/source/workspace.png" alt="FlyPix AI workspace with geospatial imagery and analysis tools" /><span>Interactive workspace</span></div>
         <div className="platform-bottom">
@@ -464,7 +464,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="partner-strip" aria-label="FlyPix AI partners">
+      <section className="partner-strip" id="partners" data-section="partners" aria-label="FlyPix AI partners">
         <p>Supported by</p>
         <div className="partner-viewport">
           <div className="partner-track">
@@ -473,7 +473,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="industries-section ruled-section" id="industries">
+      <section className="industries-section ruled-section" id="industries" data-section="use-cases">
         <div className="section-number">FlyPix / Use cases</div>
         <div className="split-heading" data-reveal><div><p className="eyebrow">One platform, any objects</p><h2>Built for every kind of scene.</h2></div><p>From ports and construction sites to forests and farms, train a model for the objects that matter to your operation. Hover over a scene to reveal its detections.</p></div>
         <div className="carousel-controls"><button type="button" aria-label="Previous industries" onClick={() => industriesRef.current?.scrollBy({ left: -372, behavior: "smooth" })}>←</button><button type="button" aria-label="Next industries" onClick={() => industriesRef.current?.scrollBy({ left: 372, behavior: "smooth" })}>→</button></div>
@@ -483,13 +483,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="comparison-section ruled-section">
+      <section className="comparison-section ruled-section" id="change-intelligence" data-section="change-intelligence">
         <div className="section-number">FlyPix / Change intelligence</div>
         <div data-reveal><BeforeAfter /></div>
         <div className="comparison-copy" data-reveal><p className="eyebrow">See the full picture</p><h2>Measure change,<br />not just pixels.</h2><p>Run the same model across captures from different dates. FlyPix counts what remained, identifies what disappeared, and measures the affected area after a fire, flood, or construction event.</p><div className="comparison-points"><p><span>01</span>Before: 412 buildings · 86.4 ha</p><p><span>02</span>After: 267 buildings · 59.1 ha</p><p><span>03</span>Damage: 145 buildings · 27.3 ha</p></div></div>
       </section>
 
-      <section className="speed-section ruled-section">
+      <section className="speed-section ruled-section" id="automated-review" data-section="automated-review">
         <div className="section-number">FlyPix / Automated review</div>
         <div className="speed-visuals" data-reveal>
           <article><div className="speed-image"><video src="/assets/figma/91176b20c94d1dc4286779dce0561ca16a27b5ce.mp4" autoPlay muted loop playsInline aria-label="Manual annotation workflow" /></div><h3>Manual annotate</h3><p>Time spent: <strong>997 sec</strong></p></article>
@@ -498,37 +498,37 @@ export default function Home() {
         <div className="speed-copy" data-reveal><p className="eyebrow">From hours to seconds</p><h2>Save 99.7% of your review time.</h2><p>AI pre-annotates every visible object across the scene. Your team verifies the result instead of tracing each object by hand.</p></div>
       </section>
 
-      <section className="workflow-section">
+      <section className="workflow-section" id="workflow" data-section="workflow">
         <div className="workflow-heading" data-reveal><p className="eyebrow">One connected workflow</p><h2>From imagery<br />to action.</h2><p>Bring your data, define what matters, train a model, and move verified results into the tools your team already uses.</p></div>
         <div className="workflow-steps">{[["01", "Upload", "Satellite, aerial, or drone imagery"], ["02", "Define", "Label the objects and patterns that matter"], ["03", "Train", "Create a reusable model without code"], ["04", "Analyze", "Detect, count, measure, and compare"], ["05", "Export", "Share layers, coordinates, and reports"]].map(([number, title, copy]) => <article key={number} data-reveal><span>{number}</span><h3>{title}</h3><p>{copy}</p></article>)}</div>
       </section>
 
-      <section className="model-section ruled-section">
+      <section className="model-section ruled-section" id="custom-models" data-section="custom-models">
         <div className="section-number">FlyPix / Custom models</div>
         <div className="model-copy" data-reveal><p className="eyebrow">Train your own model</p><h2>Create the AI<br />you need.</h2><p>Outline a few examples and FlyPix highlights the rest. Accept or reject detections in bulk, name your class, and train a reusable model — no programming required.</p><div className="token-list"><span>#TrainingMode</span><span>#CustomAIModels</span><span>#Annotations</span></div><a className="pill-button model-cta" href="https://app.flypix.ai/">Try Now</a></div>
         <div className="model-visual" data-reveal><img src="/assets/figma/3f2a215fe584044f7ab412ea4c19d4488a88193d.png" alt="FlyPix AI model training interface" /></div>
       </section>
 
-      <section className="testimonials-section ruled-section" id="testimonials">
+      <section className="testimonials-section ruled-section" id="testimonials" data-section="customer-stories">
         <div className="section-number">FlyPix / Customer stories</div>
         <div className="testimonial-heading" data-reveal><p className="eyebrow">Trusted in the field</p><h2>What teams are saying.</h2><p>Teams use FlyPix to test new ideas quickly, scale geospatial analysis, and turn complex imagery into decisions.</p></div>
         <div className="testimonial-grid">{testimonials.map((item, index) => <article key={item.name} data-reveal><span className="quote-index">0{index + 1}</span><blockquote>“{item.quote}”</blockquote><div className="person"><img src={`/assets/claude/${item.image}`} alt="" /><div><strong>{item.name}</strong><span>{item.role}</span><small>{item.company}</small></div></div></article>)}</div>
       </section>
 
-      <section className="news-section ruled-section" id="news">
+      <section className="news-section ruled-section" id="news" data-section="resources">
         <div className="section-number">FlyPix / Resources</div>
         <div className="news-heading" data-reveal><p className="eyebrow">From the blog</p><h2>Latest news.</h2><a className="text-link" href="https://flypix.ai/blog/">View all articles ↗</a></div>
         <div className="news-grid">{news.map((item, index) => <a href="https://flypix.ai/blog/" className="news-card" key={item.title} data-reveal><div className="news-image"><img src={`/assets/claude/${item.image}`} alt="" /></div><div className="news-content"><span>{item.tag} · 0{index + 1} · {item.date}</span><h3>{item.title}</h3><p>{item.copy}</p><b aria-hidden="true">Read article ↗</b></div></a>)}</div>
       </section>
 
-      <section className="final-cta" id="contact" onPointerMove={(event) => { const rect = event.currentTarget.getBoundingClientRect(); event.currentTarget.style.setProperty("--cta-x", `${event.clientX - rect.left}px`); event.currentTarget.style.setProperty("--cta-y", `${event.clientY - rect.top}px`); }}>
+      <section className="final-cta" id="contact" data-section="final-cta" onPointerMove={(event) => { const rect = event.currentTarget.getBoundingClientRect(); event.currentTarget.style.setProperty("--cta-x", `${event.clientX - rect.left}px`); event.currentTarget.style.setProperty("--cta-y", `${event.clientY - rect.top}px`); }}>
         <div className="cta-top"><span>FLYPIX / OPERATIONAL EARTH INTELLIGENCE</span><span>LIVE SYSTEM · 2026</span></div>
         <div className="cta-copy" data-reveal><p className="eyebrow">Start your first analysis</p><h2>See the whole picture.<br />Act on what matters.</h2><p>Upload a scene and see what FlyPix AI finds, or talk to our team about a custom geospatial workflow.</p><div className="hero-actions"><a className="pill-button dark" href="https://app.flypix.ai/">Try Now ↗</a><a className="pill-button light" href="mailto:info@flypix.ai">Talk to an expert</a></div></div>
         <div className="cta-system" aria-hidden="true"><i className="cta-ring ring-one" /><i className="cta-ring ring-two" /><i className="cta-ring ring-three" /><b className="cta-node node-one" /><b className="cta-node node-two" /><b className="cta-node node-three" /><strong>EARTH<br />DATA<br />ONLINE</strong></div>
         <div className="cta-bottom"><span>OBJECTS · AREAS · CHANGE</span><span>MOVE · ADJUST · EXPLORE</span></div>
       </section>
 
-      <footer>
+      <footer id="footer" data-section="footer">
         <div className="footer-brand"><a href="#" className="brand"><Brand /></a><p>AI-powered geospatial analysis for satellite, aerial, and drone imagery.</p><address>Robert-Bosch-Str. 7<br />64293 Darmstadt, Germany</address><a href="mailto:info@flypix.ai">info@flypix.ai</a></div>
         <div className="footer-column"><h3>Platform</h3><a href="#platform">About</a><a href="#industries">Services</a><a href="https://flypix.ai/pricing/">Pricing</a><a href="https://flypix.ai/career/">Career</a><h3>Plans</h3><a href="https://flypix.ai/pricing/">Basic</a><a href="https://flypix.ai/pricing/">Starter</a><a href="https://flypix.ai/pricing/">Professional</a></div>
         <div className="footer-column"><h3>Industries</h3><a href="#industries">Government</a><a href="#industries">Construction</a><a href="#industries">Renewable energy</a><a href="#industries">Agriculture & farming</a><a href="#industries">Risk management</a><a href="#industries">Oil & gas</a><a href="#industries">Port operations</a><a href="#industries">Mining</a></div>
