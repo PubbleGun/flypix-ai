@@ -1,9 +1,10 @@
-name: Deploy static preview to GitHub Pages
+name: Deploy FlyPix AI to GitHub Pages
 
 on:
   push:
     branches:
       - main
+      - "review/**"
   workflow_dispatch:
 
 permissions:
@@ -22,7 +23,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout requested version
         uses: actions/checkout@v6
 
       - name: Set up Node.js
@@ -31,14 +32,52 @@ jobs:
           node-version: 22
           cache: npm
 
-      - name: Build current site
+      - name: Build requested version
         run: |
           npm ci
           npm run build
           npm run preview:file
+
+      - name: Prepare approved public site
+        if: github.ref_name == 'main'
+        run: |
           mkdir -p _site/public
           cp github-pages/index.html _site/index.html
           cp -R public/. _site/public/
+          touch _site/.nojekyll
+
+      - name: Save working preview
+        if: github.ref_name != 'main'
+        run: |
+          PREVIEW_SLUG="${GITHUB_REF_NAME//\//-}"
+          echo "PREVIEW_SLUG=$PREVIEW_SLUG" >> "$GITHUB_ENV"
+          mkdir -p preview-output/public
+          cp github-pages/index.html preview-output/index.html
+          cp -R public/. preview-output/public/
+
+      - name: Checkout approved public version
+        if: github.ref_name != 'main'
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          path: approved-source
+
+      - name: Build approved public version
+        if: github.ref_name != 'main'
+        working-directory: approved-source
+        run: |
+          npm ci
+          npm run build
+          npm run preview:file
+
+      - name: Combine public site and working preview
+        if: github.ref_name != 'main'
+        run: |
+          mkdir -p _site/public
+          cp approved-source/github-pages/index.html _site/index.html
+          cp -R approved-source/public/. _site/public/
+          mkdir -p "_site/previews/$PREVIEW_SLUG"
+          cp -R preview-output/. "_site/previews/$PREVIEW_SLUG/"
           touch _site/.nojekyll
 
       - name: Configure GitHub Pages
