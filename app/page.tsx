@@ -334,6 +334,10 @@ function HeroGlobe() {
           ref={(node) => { markerRefs.current[index] = node; }}
           key={`${detection.value}-${detection.label}`}
           data-detection-marker
+          data-lon={detection.longitude}
+          data-lat={detection.latitude}
+          data-offset-x={detection.offsetX}
+          data-offset-y={detection.offsetY}
           tabIndex={0}
           aria-label={`${detection.value} ${detection.label}`}
         >
