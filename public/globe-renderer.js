@@ -8,9 +8,9 @@
   function mountGlobe(stage) {
     if (stage.dataset.globeMounted === "true") return;
 
-    const shell = stage.querySelector(".globe-shell");
-    const canvas = stage.querySelector(".globe-canvas");
-    const badges = [...stage.querySelectorAll(".detection-badge")];
+    const shell = stage.querySelector(".globe-shell, .hero-globe-shell");
+    const canvas = stage.querySelector(".globe-canvas, .hero-globe-canvas");
+    const badges = [...stage.querySelectorAll(".detection-badge, .detection-marker")];
     if (!shell || !canvas) return;
 
     const context = canvas.getContext("2d", { alpha: true });
@@ -111,58 +111,6 @@
       };
     };
 
-    const drawGeoLine = (points, radius, center) => {
-      let drawing = false;
-      context.beginPath();
-      points.forEach(([longitude, latitude]) => {
-        const point = project(longitude, latitude);
-        if (point.z <= 0.015) {
-          drawing = false;
-          return;
-        }
-        const x = center + point.x * radius;
-        const y = center - point.y * radius;
-        if (!drawing) {
-          context.moveTo(x, y);
-          drawing = true;
-        } else {
-          context.lineTo(x, y);
-        }
-      });
-      context.stroke();
-    };
-
-    const drawGraticule = () => {
-      const center = resolution / 2;
-      const radius = resolution * 0.493;
-      context.save();
-      context.lineWidth = Math.max(0.55, resolution / 780);
-      context.strokeStyle = "rgba(95, 117, 111, 0.115)";
-
-      for (let longitude = -150; longitude <= 180; longitude += 30) {
-        const points = [];
-        for (let latitude = -88; latitude <= 88; latitude += 2) {
-          points.push([longitude, latitude]);
-        }
-        drawGeoLine(points, radius, center);
-      }
-
-      for (let latitude = -60; latitude <= 60; latitude += 20) {
-        const points = [];
-        for (let longitude = -180; longitude <= 180; longitude += 2) {
-          points.push([longitude, latitude]);
-        }
-        drawGeoLine(points, radius, center);
-      }
-
-      context.beginPath();
-      context.arc(center, center, radius, 0, TWO_PI);
-      context.lineWidth = Math.max(0.8, resolution / 620);
-      context.strokeStyle = "rgba(86, 110, 104, 0.18)";
-      context.stroke();
-      context.restore();
-    };
-
     const placeBadges = () => {
       const shellRect = shell.getBoundingClientRect();
       const stageRect = stage.getBoundingClientRect();
@@ -174,10 +122,15 @@
         const longitude = Number(badge.dataset.lon);
         const latitude = Number(badge.dataset.lat);
         const point = project(longitude, latitude);
+        const badgeOffsetX = Number(badge.dataset.offsetX) || 0;
+        const badgeOffsetY = Number(badge.dataset.offsetY) || 0;
+        const visibility = Math.max(0, Math.min(1, (point.z - 0.06) / 0.18));
         badge.style.left = `${offsetX + point.x * radius}px`;
         badge.style.top = `${offsetY - point.y * radius}px`;
-        badge.style.opacity = point.z > 0.1 ? "1" : "0";
-        badge.style.transform = `translate(-50%, -50%) scale(${point.z > 0.1 ? 1 : 0.86})`;
+        badge.style.opacity = `${visibility}`;
+        badge.style.zIndex = point.z > 0.5 ? "8" : "5";
+        badge.style.pointerEvents = visibility > 0.9 ? "auto" : "none";
+        badge.style.transform = `translate(-50%, -50%) translate(${badgeOffsetX}px, ${badgeOffsetY}px) scale(${0.94 + visibility * 0.06})`;
       });
     };
 
@@ -225,7 +178,6 @@
 
       context.clearRect(0, 0, resolution, resolution);
       context.putImageData(imageData, 0, 0);
-      drawGraticule();
       placeBadges();
       stage.classList.add("is-ready");
     };
@@ -234,7 +186,7 @@
       const delta = Math.min(48, now - lastTick);
       lastTick = now;
       if (!paused && !dragging && !reducedMotion.matches) {
-        rotation += delta * 0.000038;
+        rotation += 5 * DEG * (delta / 1000);
         dirty = true;
       }
       if (dirty && now - lastPaint >= 32) {
@@ -257,7 +209,17 @@
     image.onerror = () => stage.classList.add("is-error");
     image.src = window.__WORLD_MAP_DATA_URI__ || stage.dataset.mapSrc || "/world-map.svg";
 
+    const pointerIsOnGlobe = (event) => {
+      const rect = shell.getBoundingClientRect();
+      const distance = Math.hypot(
+        event.clientX - (rect.left + rect.width / 2),
+        event.clientY - (rect.top + rect.height / 2),
+      );
+      return distance <= rect.width / 2 || Boolean(event.target?.closest?.("[data-detection-marker]"));
+    };
+
     const pointerDown = (event) => {
+      if (!pointerIsOnGlobe(event)) return;
       dragging = true;
       paused = true;
       startX = event.clientX;
@@ -266,9 +228,12 @@
       stage.classList.add("is-dragging");
     };
     const pointerMove = (event) => {
-      if (!dragging) return;
-      rotation = startRotation + (event.clientX - startX) * 0.008;
-      dirty = true;
+      if (dragging) {
+        rotation = startRotation + (event.clientX - startX) * 0.008;
+        dirty = true;
+      } else {
+        paused = event.pointerType !== "touch" && pointerIsOnGlobe(event);
+      }
     };
     const pointerUp = (event) => {
       dragging = false;
@@ -279,7 +244,6 @@
       if (event.pointerType !== "mouse") paused = false;
     };
 
-    stage.addEventListener("pointerenter", () => { paused = true; });
     stage.addEventListener("pointerleave", () => {
       paused = false;
       dragging = false;
@@ -305,7 +269,7 @@
   }
 
   const mountAll = () => {
-    document.querySelectorAll(".globe-stage").forEach(mountGlobe);
+    document.querySelectorAll(".globe-stage, .hero-globe-stage").forEach(mountGlobe);
   };
 
   window.FlyPixGlobe = { mountAll };
