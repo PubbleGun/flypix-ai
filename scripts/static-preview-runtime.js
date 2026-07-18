@@ -79,4 +79,14 @@
       navigation?.classList.contains("is-open") ? "true" : "false",
     );
   });
+  const scrollToCurrentSection = () => {
+    const id = decodeURIComponent(window.location.hash.slice(1));
+    if (!id) return;
+    const section = document.getElementById(id);
+    if (!section) return;
+    window.requestAnimationFrame(() => section.scrollIntoView({ block: "start" }));
+  };
+  window.addEventListener("hashchange", scrollToCurrentSection);
+  window.setTimeout(scrollToCurrentSection, 80);
+
 })();
