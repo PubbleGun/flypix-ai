@@ -1,6 +1,3 @@
-Exit code: 0
-Wall time: 1 seconds
-Output:
 (() => {
   const TWO_PI = Math.PI * 2;
   const DEG = Math.PI / 180;
