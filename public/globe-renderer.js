@@ -1,3 +1,6 @@
+Exit code: 0
+Wall time: 1 seconds
+Output:
 (() => {
   const TWO_PI = Math.PI * 2;
   const DEG = Math.PI / 180;
@@ -19,8 +22,8 @@
     stage.dataset.globeMounted = "true";
 
     const textureCanvas = document.createElement("canvas");
-    textureCanvas.width = 900;
-    textureCanvas.height = 450;
+    textureCanvas.width = 2048;
+    textureCanvas.height = 1024;
     const textureContext = textureCanvas.getContext("2d", {
       alpha: true,
       willReadFrequently: true,
@@ -45,9 +48,13 @@
 
     const rebuildProjection = () => {
       const rect = shell.getBoundingClientRect();
+      const qualityScale = Math.max(
+        1.5,
+        Math.min(window.devicePixelRatio || 1, 2),
+      );
       const nextResolution = Math.max(
-        300,
-        Math.min(540, Math.round(rect.width * Math.min(window.devicePixelRatio || 1, 1.15))),
+        420,
+        Math.min(1024, Math.round(rect.width * qualityScale)),
       );
       if (nextResolution === resolution) return;
 
@@ -201,6 +208,8 @@
     image.onload = () => {
       if (!textureContext) return;
       textureContext.clearRect(0, 0, textureCanvas.width, textureCanvas.height);
+      textureContext.imageSmoothingEnabled = true;
+      textureContext.imageSmoothingQuality = "high";
       textureContext.drawImage(image, 0, 0, textureCanvas.width, textureCanvas.height);
       texture = textureContext.getImageData(0, 0, textureCanvas.width, textureCanvas.height);
       rebuildProjection();
@@ -279,3 +288,4 @@
     mountAll();
   }
 })();
+
