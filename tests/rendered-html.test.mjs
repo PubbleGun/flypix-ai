@@ -37,6 +37,10 @@ test("server-renders the complete FlyPix landing page", async () => {
   assert.match(html, /Save 99\.7% of[\s\S]*review time/i);
   assert.match(html, /What teams[\s\S]*are saying/i);
   assert.match(html, /See the whole picture[\s\S]*Act on what matters/i);
+  assert.equal((html.match(/class="news-card/g) ?? []).length, 8);
+  const finalCta = html.match(/<section class="final-cta"[\s\S]*?<\/section>/i)?.[0] ?? "";
+  assert.match(finalCta, />Try Now</i);
+  assert.doesNotMatch(finalCta, /Talk to an expert|cta-system|cta-top|cta-bottom/i);
   for (const sectionId of [
     "hero",
     "platform",
@@ -73,10 +77,21 @@ test("keeps the interactive and responsive implementation in place", async () =>
   assert.match(page, /IntersectionObserver/);
   assert.match(page, /headerCompact/);
   assert.match(page, /backdropFilter:\s*"blur\(var\(--header-blur\)\)/);
+  assert.match(page, /className="comparison-visual"/);
+  assert.match(page, /className="speed-copy"[\s\S]*className="speed-visuals"/);
+  assert.match(page, /Array\.from\(\{\s*length:\s*4\s*\}/);
+  assert.match(page, /className="final-cta"/);
+  assert.doesNotMatch(page, /className="cta-system"|Talk to an expert/);
   assert.match(css, /\.site-header\.is-compact/);
   assert.match(css, /\.section-number\s*\{[\s\S]*left:\s*50%/);
+  assert.match(css, /\.comparison-visual\s*\{[^}]*aspect-ratio:\s*4\s*\/\s*3/);
+  assert.match(css, /\.news-grid\s*\{[^}]*repeat\(4/);
+  assert.match(css, /\.final-cta\s*\{[\s\S]*background:\s*#111927/);
+  assert.match(css, /\.hero-word\s*\{[^}]*width:\s*102vw[^}]*rgba\(255,255,255,\.25\)/);
+  assert.match(css, /\.footer-word\s*\{[^}]*width:\s*102vw[^}]*rgba\(255,255,255,\.5\)/);
   assert.doesNotMatch(css, /\.site-header\s*\{[^}]*box-shadow:/);
   assert.match(staticRuntime, /classList\.toggle\("is-compact"/);
+  assert.match(staticRuntime, /const finalCta = document\.querySelector\("\.final-cta"\)/);
   assert.match(css, /@media \(max-width: 1020px\)/);
   assert.match(css, /@media \(max-width: 720px\)/);
   assert.match(css, /prefers-reduced-motion/);
@@ -106,4 +121,3 @@ test("ships the imagery, videos, and map used by the page", async () => {
     ),
   ]);
 });
-
