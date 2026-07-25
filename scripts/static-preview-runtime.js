@@ -71,7 +71,8 @@
   wireCarousel(".testimonials-section", ".testimonial-carousel", 380);
 
   const menuButton = document.querySelector(".menu-button");
-  const navigation = document.querySelector(".site-header nav");
+  const siteHeader = document.querySelector(".site-header");
+  const navigation = siteHeader?.querySelector("nav");
   menuButton?.addEventListener("click", () => {
     navigation?.classList.toggle("is-open");
     menuButton.setAttribute(
@@ -79,6 +80,11 @@
       navigation?.classList.contains("is-open") ? "true" : "false",
     );
   });
+
+  const updateHeader = () => siteHeader?.classList.toggle("is-compact", window.scrollY > 16);
+  updateHeader();
+  window.addEventListener("scroll", updateHeader, { passive: true });
+
   const scrollToCurrentSection = () => {
     const id = decodeURIComponent(window.location.hash.slice(1));
     if (!id) return;
@@ -88,5 +94,5 @@
   };
   window.addEventListener("hashchange", scrollToCurrentSection);
   window.setTimeout(scrollToCurrentSection, 80);
-
 })();
+
