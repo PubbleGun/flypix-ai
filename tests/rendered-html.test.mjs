@@ -72,6 +72,7 @@ test("keeps the interactive and responsive implementation in place", async () =>
   assert.match(page, /role="slider"/);
   assert.match(page, /IntersectionObserver/);
   assert.match(page, /headerCompact/);
+  assert.match(page, /backdropFilter:\s*"blur\(var\(--header-blur\)\)/);
   assert.match(css, /\.site-header\.is-compact/);
   assert.match(css, /\.section-number\s*\{[\s\S]*left:\s*50%/);
   assert.doesNotMatch(css, /\.site-header\s*\{[^}]*box-shadow:/);
