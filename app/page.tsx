@@ -470,7 +470,6 @@ export default function Home() {
       </section>
 
       <section className="platform-section ruled-section" id="platform" data-section="platform">
-        <div className="section-number">FlyPix / Platform</div>
         <div className="platform-frame" data-reveal><img src="/assets/source/workspace.png" alt="FlyPix AI workspace with geospatial imagery and analysis tools" /><span>Interactive workspace</span></div>
         <div className="platform-bottom">
           <div className="platform-title" data-reveal><p className="eyebrow">One workspace</p><h2>Every object,<br />on the map.</h2></div>
@@ -479,7 +478,6 @@ export default function Home() {
       </section>
 
       <section className="partner-strip" id="partners" data-section="partners" aria-label="FlyPix AI partners">
-        <p>Supported by</p>
         <div className="partner-viewport">
           <div className="partner-track">
             {[0, 1].map((set) => <div className="partner-set" aria-hidden={set === 1} key={set}><img src="/assets/source/esa.svg" alt={set ? "" : "ESA"} /><img src="/assets/source/nvidia.svg" alt={set ? "" : "NVIDIA"} /><img src="/assets/source/google.svg" alt={set ? "" : "Google"} /><img src="/assets/source/ecmwf.svg" alt={set ? "" : "ECMWF"} /><img src="/assets/source/ibm.svg" alt={set ? "" : "IBM"} /></div>)}
@@ -488,7 +486,6 @@ export default function Home() {
       </section>
 
       <section className="industries-section ruled-section" id="industries" data-section="use-cases">
-        <div className="section-number">FlyPix / Use cases</div>
         <div className="split-heading" data-reveal><div><p className="eyebrow">One platform, any objects</p><h2>Built for every kind of scene.</h2></div><p>From ports and construction sites to forests and farms, train a model for the objects that matter to your operation. Hover over a scene to reveal its detections.</p></div>
         <div className="carousel-controls"><button type="button" aria-label="Previous industries" onClick={() => industriesRef.current?.scrollBy({ left: -372, behavior: "smooth" })}>←</button><button type="button" aria-label="Next industries" onClick={() => industriesRef.current?.scrollBy({ left: 372, behavior: "smooth" })}>→</button></div>
         <div className="industry-carousel" ref={industriesRef}>
@@ -498,7 +495,6 @@ export default function Home() {
       </section>
 
       <section className="comparison-section ruled-section" id="change-intelligence" data-section="change-intelligence">
-        <div className="section-number">FlyPix / Change intelligence</div>
         <div className="comparison-visual" data-reveal><BeforeAfter /></div>
         <div className="comparison-copy" data-reveal>
           <p className="eyebrow">See the full picture</p>
@@ -513,7 +509,6 @@ export default function Home() {
       </section>
 
       <section className="speed-section ruled-section" id="automated-review" data-section="automated-review">
-        <div className="section-number">FlyPix / Automated review</div>
         <div className="speed-copy" data-reveal><p className="eyebrow">From hours to seconds</p><h2>Save 99.7% of your review time.</h2><p>AI pre-annotates every visible object across the scene. Your team verifies the result instead of tracing each object by hand.</p></div>
         <div className="speed-visuals" data-reveal>
           <article><div className="speed-image"><video src="/assets/figma/91176b20c94d1dc4286779dce0561ca16a27b5ce.mp4" autoPlay muted loop playsInline aria-label="Manual annotation workflow" /></div><div className="speed-card"><h3>Manual annotate</h3><p>Time spent: <strong>997 sec</strong></p></div></article>
@@ -527,23 +522,19 @@ export default function Home() {
       </section>
 
       <section className="model-section ruled-section" id="custom-models" data-section="custom-models">
-        <div className="section-number">FlyPix / Custom models</div>
         <div className="model-copy" data-reveal><p className="eyebrow">Train your own model</p><h2>Create the AI<br />you need.</h2><p>Outline a few examples and FlyPix highlights the rest. Accept or reject detections in bulk, name your class, and train a reusable model — no programming required.</p><div className="token-list"><span>#TrainingMode</span><span>#CustomAIModels</span><span>#Annotations</span></div><a className="pill-button model-cta" href="https://app.flypix.ai/">Try Now</a></div>
         <div className="model-visual" data-reveal><img src="/assets/figma/3f2a215fe584044f7ab412ea4c19d4488a88193d.png" alt="FlyPix AI model training interface" /></div>
       </section>
 
       <section className="testimonials-section ruled-section" id="testimonials" data-section="customer-stories">
-        <div className="section-number">FlyPix / Customer stories</div>
         <div className="testimonial-heading" data-reveal><p className="eyebrow">Trusted in the field</p><h2>What teams are saying.</h2><p>Teams use FlyPix to test new ideas quickly, scale geospatial analysis, and turn complex imagery into decisions.</p></div>
         <div className="testimonial-grid">{testimonials.map((item, index) => <article key={item.name} data-reveal><span className="quote-index">0{index + 1}</span><blockquote>“{item.quote}”</blockquote><div className="person"><img src={`/assets/claude/${item.image}`} alt="" /><div><strong>{item.name}</strong><span>{item.role}</span><small>{item.company}</small></div></div></article>)}</div>
       </section>
 
       <section className="news-section ruled-section" id="news" data-section="resources">
-        <div className="section-number">FlyPix / Resources</div>
         <div className="news-heading" data-reveal><p className="eyebrow">From the blog</p><h2>Latest news.</h2><a className="text-link" href="https://flypix.ai/blog/">View all articles ↗</a></div>
         <div className="news-grid">
           {news.map((item, index) => <a href="https://flypix.ai/blog/" className="news-card" key={item.title} data-reveal><div className="news-image"><img src={`/assets/claude/${item.image}`} alt="" /></div><div className="news-content"><span>{item.tag} · 0{index + 1} · {item.date}</span><h3>{item.title}</h3><p>{item.copy}</p><b aria-hidden="true">Read article ↗</b></div></a>)}
-          {Array.from({ length: 4 }, (_, index) => <div className="news-card news-placeholder" key={`news-placeholder-${index}`} aria-hidden="true"><div className="news-image" /><div className="news-content"><i /><i /><i /></div></div>)}
         </div>
       </section>
 
@@ -557,7 +548,6 @@ export default function Home() {
         <div className="footer-column"><h3>Industries</h3><a href="#industries">Government</a><a href="#industries">Construction</a><a href="#industries">Renewable energy</a><a href="#industries">Agriculture & farming</a><a href="#industries">Risk management</a><a href="#industries">Oil & gas</a><a href="#industries">Port operations</a><a href="#industries">Mining</a></div>
         <div className="footer-column"><h3>Partners</h3><a href="https://flypix.ai/">ESA BIC Hessen</a><a href="https://flypix.ai/">NVIDIA Inception</a><a href="https://flypix.ai/">Google for Startups</a><a href="https://flypix.ai/">IBM for Startups</a><h3>Terms</h3><a href="https://flypix.ai/privacy-policy/">Data privacy</a><a href="https://flypix.ai/privacy-policy/">Privacy policy</a><a href="https://flypix.ai/imprint/">Imprint</a></div>
         <div className="footer-column"><h3>Resources</h3><a href="#news">News</a><a href="https://flypix.ai/blog/">Blog</a><a href="https://flypix.ai/how-credits-work/">How credits work</a><a href="https://flypix.ai/faq/">FAQs</a><a href="https://app.flypix.ai/">FlyPix Sandbox</a><h3>Contact us</h3><a href="mailto:info@flypix.ai">info@flypix.ai</a><a href="tel:+4961512776497">+49 6151 2776497</a></div>
-        <div className="footer-word" aria-hidden="true">FLYPIX AI</div>
         <div className="footer-bottom"><span>© 2026 FlyPix AI GmbH · All Rights Reserved</span><a href="#">Back to top ↑</a></div>
       </footer>
     </main>
