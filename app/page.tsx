@@ -28,7 +28,7 @@ const detections: Detection[] = [
   { value: "37", label: "vessels", longitude: 121.5, latitude: 31.2, color: "#13b8b2", offsetX: 50, offsetY: -22 },
   { value: "6,712", label: "buildings", longitude: 36.8, latitude: -1.3, color: "#6267e8", offsetX: -52, offsetY: 20 },
   { value: "146", label: "wind turbines", longitude: 9.4, latitude: 56.2, color: "#66d9c2", offsetX: 48, offsetY: -34 },
-  { value: "3,840 mÂ²", label: "waste piles", longitude: 7.5, latitude: 9, color: "#9acb45", offsetX: 58, offsetY: 5 },
+  { value: "3,840 m²", label: "waste piles", longitude: 7.5, latitude: 9, color: "#9acb45", offsetX: 58, offsetY: 5 },
   { value: "1,276", label: "cattle", longitude: -58.4, latitude: -34.6, color: "#b78662", offsetX: 54, offsetY: 22 },
   { value: "18.4 ha", label: "oil spill", longitude: 110, latitude: -5, color: "#b94a5b", offsetX: 58, offsetY: 24 },
   { value: "734", label: "railcars", longitude: 68, latitude: 48, color: "#f5b942", offsetX: -52, offsetY: -20 },
@@ -56,7 +56,7 @@ const testimonials = [
   { quote: "We were impressed by the dedicated, easy-to-work-with team, their expertise, and the quick application of the technology to a novel use case.", name: "Hannes Olbrich", role: "Head of Investor Office", company: "acitoflux, Germany", image: "asset-20.webp" },
   { quote: "FlyPix AI helped us go from idea to proof of concept in record time. We tested geospatial insights on real property data within days.", name: "Ali Tehranchi", role: "CEO", company: "Bayscenary, USA", image: "asset-21.webp" },
   { quote: "What surprised us most was how effortless it was to start using FlyPix AI. The platform is robust, easy to navigate, and reliable.", name: "Krishna Mohan", role: "Business Head", company: "Stesalit Systems Ltd., India", image: "asset-22.webp" },
-  { quote: "FlyPix AI made it remarkably easy to turn drone imagery into actionable results within minutes, without complex setups.", name: "Jordan Bates", role: "Researcher", company: "University of LiÃ¨ge, Belgium", image: "asset-23.webp" },
+  { quote: "FlyPix AI made it remarkably easy to turn drone imagery into actionable results within minutes, without complex setups.", name: "Jordan Bates", role: "Researcher", company: "University of Liège, Belgium", image: "asset-23.webp" },
   { quote: "Working with FlyPix AI has significantly elevated the impact of our clean-up missions. We are proud to collaborate with a team that shares our commitment to environmental responsibility.", name: "Robin Engelhard", role: "Chairman", company: "Second Life e.V., Germany", image: "asset-24.webp" },
   { quote: "FlyPix AI helped us automate land-use classification with incredible precision and speed, saving months of manual work.", name: "Rohit Singh", role: "Director", company: "Intent to Solution, India", image: "asset-25.webp" },
 ];
@@ -64,7 +64,7 @@ const testimonials = [
 const news = [
   { tag: "Company", date: "May 19, 2025", image: "asset-26.webp", title: "FlyPix AI joins AWS GenAI Launchpad in Berlin", copy: "From proof of concept to a production-ready geospatial AI workflow." },
   { tag: "Events", date: "May 18, 2025", image: "asset-27.webp", title: "FlyPix AI showcases innovation at Block im Park", copy: "Practical GeoAI applications for teams working with complex imagery." },
-  { tag: "Insurance", date: "May 14, 2025", image: "asset-28.webp", title: "Selected for InsureLab Germanyâ€™s Batch #25", copy: "Advancing geospatial intelligence for risk assessment and insurance." },
+  { tag: "Insurance", date: "May 14, 2025", image: "asset-28.webp", title: "Selected for InsureLab Germany’s Batch #25", copy: "Advancing geospatial intelligence for risk assessment and insurance." },
   { tag: "Research", date: "May 6, 2025", image: "asset-29.webp", title: "Foundation model breakthroughs at the ESA/NASA workshop", copy: "Exploring the next generation of foundation models for Earth observation." },
 ];
 
@@ -378,8 +378,8 @@ function BeforeAfter() {
       <div className="comparison-top" style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}>
         <img src="/assets/claude/asset-18.webp" alt="Buildings detected before a destructive event" />
       </div>
-      <span className="comparison-label before">Before Â· 412 buildings</span>
-      <span className="comparison-label after">After Â· 267 buildings</span>
+      <span className="comparison-label before">Before · 412 buildings</span>
+      <span className="comparison-label after">After · 267 buildings</span>
       <div className="comparison-line" style={{ left: `${position}%` }}><button type="button" aria-hidden="true"><i /><i /></button></div>
     </div>
   );
@@ -444,7 +444,7 @@ export default function Home() {
         <div className="hero-copy" data-reveal>
           <p className="eyebrow">Geospatial AI platform</p>
           <h1>Detect and count anything from the sky</h1>
-          <p className="lead">Turn satellite, aerial, and drone imagery into mapped, measurable results â€” and teach the AI to spot the objects you define, with no code.</p>
+          <p className="lead">Turn satellite, aerial, and drone imagery into mapped, measurable results — and teach the AI to spot the objects you define, with no code.</p>
           <div className="hero-actions"><a className="pill-button" href="https://app.flypix.ai/">Try Now</a><a className="pill-button secondary" href="#contact">Contact us</a></div>
         </div>
 
@@ -453,9 +453,9 @@ export default function Home() {
         <aside className="hero-data" data-reveal>
           <div className="data-group">
             <p className="data-title">Analyzes imagery</p>
-            <div className="source-item"><SourceIcon type="satellite" /><span>Satellite</span><b>1 pix / 0.3â€“10 mÂ²</b></div>
-            <div className="source-item"><SourceIcon type="aircraft" /><span>Aircraft</span><b>1 pix / 10 cmÂ²</b></div>
-            <div className="source-item"><SourceIcon type="drone" /><span>Drone</span><b>1 pix / 1 cmÂ²</b></div>
+            <div className="source-item"><SourceIcon type="satellite" /><span>Satellite</span><b>1 pix / 0.3–10 m²</b></div>
+            <div className="source-item"><SourceIcon type="aircraft" /><span>Aircraft</span><b>1 pix / 10 cm²</b></div>
+            <div className="source-item"><SourceIcon type="drone" /><span>Drone</span><b>1 pix / 1 cm²</b></div>
           </div>
           <div className="data-group capabilities"><p className="data-title">Capabilities</p><p>Train your own AI</p><p>Compare over time</p><p>Get exact coordinates</p></div>
         </aside>
@@ -474,7 +474,7 @@ export default function Home() {
         <div className="platform-frame" data-reveal><img src="/assets/source/workspace.png" alt="FlyPix AI workspace with geospatial imagery and analysis tools" /><span>Interactive workspace</span></div>
         <div className="platform-bottom">
           <div className="platform-title" data-reveal><p className="eyebrow">One workspace</p><h2>Every object,<br />on the map.</h2></div>
-          <div className="platform-action" data-reveal><p>Detected objects, counts, and areas land on a map your team can explore, correct, compare, and export â€” without leaving the browser.</p><a className="pill-button" href="https://app.flypix.ai/">Try Now</a></div>
+          <div className="platform-action" data-reveal><p>Detected objects, counts, and areas land on a map your team can explore, correct, compare, and export — without leaving the browser.</p><a className="pill-button" href="https://app.flypix.ai/">Try Now</a></div>
         </div>
       </section>
 
@@ -490,7 +490,7 @@ export default function Home() {
       <section className="industries-section ruled-section" id="industries" data-section="use-cases">
         <div className="section-number">FlyPix / Use cases</div>
         <div className="split-heading" data-reveal><div><p className="eyebrow">One platform, any objects</p><h2>Built for every kind of scene.</h2></div><p>From ports and construction sites to forests and farms, train a model for the objects that matter to your operation. Hover over a scene to reveal its detections.</p></div>
-        <div className="carousel-controls"><button type="button" aria-label="Previous industries" onClick={() => industriesRef.current?.scrollBy({ left: -372, behavior: "smooth" })}>â†</button><button type="button" aria-label="Next industries" onClick={() => industriesRef.current?.scrollBy({ left: 372, behavior: "smooth" })}>â†’</button></div>
+        <div className="carousel-controls"><button type="button" aria-label="Previous industries" onClick={() => industriesRef.current?.scrollBy({ left: -372, behavior: "smooth" })}>←</button><button type="button" aria-label="Next industries" onClick={() => industriesRef.current?.scrollBy({ left: 372, behavior: "smooth" })}>→</button></div>
         <div className="industry-carousel" ref={industriesRef}>
           {industries.map(([name, raw, detected], index) => <article className="industry-card" key={name}><img className="raw-image" src={`/assets/claude/${raw}`} alt={`${name} aerial imagery`} /><img className="detected-image" src={`/assets/claude/${detected}`} alt={`${name} AI detections`} /><div className="industry-caption"><span>0{index + 1}</span><strong>{name}</strong><em>Raw / AI</em></div></article>)}
           <article className="industry-card industry-cta"><span>09</span><div><p className="eyebrow">Your industry</p><h3>Train AI for any scene.</h3><a className="pill-button light" href="https://app.flypix.ai/">Try Now</a></div></article>
@@ -528,21 +528,21 @@ export default function Home() {
 
       <section className="model-section ruled-section" id="custom-models" data-section="custom-models">
         <div className="section-number">FlyPix / Custom models</div>
-        <div className="model-copy" data-reveal><p className="eyebrow">Train your own model</p><h2>Create the AI<br />you need.</h2><p>Outline a few examples and FlyPix highlights the rest. Accept or reject detections in bulk, name your class, and train a reusable model â€” no programming required.</p><div className="token-list"><span>#TrainingMode</span><span>#CustomAIModels</span><span>#Annotations</span></div><a className="pill-button model-cta" href="https://app.flypix.ai/">Try Now</a></div>
+        <div className="model-copy" data-reveal><p className="eyebrow">Train your own model</p><h2>Create the AI<br />you need.</h2><p>Outline a few examples and FlyPix highlights the rest. Accept or reject detections in bulk, name your class, and train a reusable model — no programming required.</p><div className="token-list"><span>#TrainingMode</span><span>#CustomAIModels</span><span>#Annotations</span></div><a className="pill-button model-cta" href="https://app.flypix.ai/">Try Now</a></div>
         <div className="model-visual" data-reveal><img src="/assets/figma/3f2a215fe584044f7ab412ea4c19d4488a88193d.png" alt="FlyPix AI model training interface" /></div>
       </section>
 
       <section className="testimonials-section ruled-section" id="testimonials" data-section="customer-stories">
         <div className="section-number">FlyPix / Customer stories</div>
         <div className="testimonial-heading" data-reveal><p className="eyebrow">Trusted in the field</p><h2>What teams are saying.</h2><p>Teams use FlyPix to test new ideas quickly, scale geospatial analysis, and turn complex imagery into decisions.</p></div>
-        <div className="testimonial-grid">{testimonials.map((item, index) => <article key={item.name} data-reveal><span className="quote-index">0{index + 1}</span><blockquote>â€œ{item.quote}â€</blockquote><div className="person"><img src={`/assets/claude/${item.image}`} alt="" /><div><strong>{item.name}</strong><span>{item.role}</span><small>{item.company}</small></div></div></article>)}</div>
+        <div className="testimonial-grid">{testimonials.map((item, index) => <article key={item.name} data-reveal><span className="quote-index">0{index + 1}</span><blockquote>“{item.quote}”</blockquote><div className="person"><img src={`/assets/claude/${item.image}`} alt="" /><div><strong>{item.name}</strong><span>{item.role}</span><small>{item.company}</small></div></div></article>)}</div>
       </section>
 
       <section className="news-section ruled-section" id="news" data-section="resources">
         <div className="section-number">FlyPix / Resources</div>
-        <div className="news-heading" data-reveal><p className="eyebrow">From the blog</p><h2>Latest news.</h2><a className="text-link" href="https://flypix.ai/blog/">View all articles â†—</a></div>
+        <div className="news-heading" data-reveal><p className="eyebrow">From the blog</p><h2>Latest news.</h2><a className="text-link" href="https://flypix.ai/blog/">View all articles ↗</a></div>
         <div className="news-grid">
-          {news.map((item, index) => <a href="https://flypix.ai/blog/" className="news-card" key={item.title} data-reveal><div className="news-image"><img src={`/assets/claude/${item.image}`} alt="" /></div><div className="news-content"><span>{item.tag} Â· 0{index + 1} Â· {item.date}</span><h3>{item.title}</h3><p>{item.copy}</p><b aria-hidden="true">Read article â†—</b></div></a>)}
+          {news.map((item, index) => <a href="https://flypix.ai/blog/" className="news-card" key={item.title} data-reveal><div className="news-image"><img src={`/assets/claude/${item.image}`} alt="" /></div><div className="news-content"><span>{item.tag} · 0{index + 1} · {item.date}</span><h3>{item.title}</h3><p>{item.copy}</p><b aria-hidden="true">Read article ↗</b></div></a>)}
           {Array.from({ length: 4 }, (_, index) => <div className="news-card news-placeholder" key={`news-placeholder-${index}`} aria-hidden="true"><div className="news-image" /><div className="news-content"><i /><i /><i /></div></div>)}
         </div>
       </section>
@@ -558,7 +558,7 @@ export default function Home() {
         <div className="footer-column"><h3>Partners</h3><a href="https://flypix.ai/">ESA BIC Hessen</a><a href="https://flypix.ai/">NVIDIA Inception</a><a href="https://flypix.ai/">Google for Startups</a><a href="https://flypix.ai/">IBM for Startups</a><h3>Terms</h3><a href="https://flypix.ai/privacy-policy/">Data privacy</a><a href="https://flypix.ai/privacy-policy/">Privacy policy</a><a href="https://flypix.ai/imprint/">Imprint</a></div>
         <div className="footer-column"><h3>Resources</h3><a href="#news">News</a><a href="https://flypix.ai/blog/">Blog</a><a href="https://flypix.ai/how-credits-work/">How credits work</a><a href="https://flypix.ai/faq/">FAQs</a><a href="https://app.flypix.ai/">FlyPix Sandbox</a><h3>Contact us</h3><a href="mailto:info@flypix.ai">info@flypix.ai</a><a href="tel:+4961512776497">+49 6151 2776497</a></div>
         <div className="footer-word" aria-hidden="true">FLYPIX AI</div>
-        <div className="footer-bottom"><span>Â© 2026 FlyPix AI GmbH Â· All Rights Reserved</span><a href="#">Back to top â†‘</a></div>
+        <div className="footer-bottom"><span>© 2026 FlyPix AI GmbH · All Rights Reserved</span><a href="#">Back to top ↑</a></div>
       </footer>
     </main>
   );
