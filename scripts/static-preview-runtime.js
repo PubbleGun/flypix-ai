@@ -85,6 +85,13 @@
   updateHeader();
   window.addEventListener("scroll", updateHeader, { passive: true });
 
+  const finalCta = document.querySelector(".final-cta");
+  finalCta?.addEventListener("pointermove", (event) => {
+    const rect = finalCta.getBoundingClientRect();
+    finalCta.style.setProperty("--cta-x", `${event.clientX - rect.left}px`);
+    finalCta.style.setProperty("--cta-y", `${event.clientY - rect.top}px`);
+  });
+
   const scrollToCurrentSection = () => {
     const id = decodeURIComponent(window.location.hash.slice(1));
     if (!id) return;
@@ -95,4 +102,3 @@
   window.addEventListener("hashchange", scrollToCurrentSection);
   window.setTimeout(scrollToCurrentSection, 80);
 })();
-
