@@ -499,17 +499,26 @@ export default function Home() {
 
       <section className="comparison-section ruled-section" id="change-intelligence" data-section="change-intelligence">
         <div className="section-number">FlyPix / Change intelligence</div>
-        <div data-reveal><BeforeAfter /></div>
-        <div className="comparison-copy" data-reveal><p className="eyebrow">See the full picture</p><h2>Measure change,<br />not just pixels.</h2><p>Run the same model across captures from different dates. FlyPix counts what remained, identifies what disappeared, and measures the affected area after a fire, flood, or construction event.</p><div className="comparison-points"><p><span>01</span>Before: 412 buildings Â· 86.4 ha</p><p><span>02</span>After: 267 buildings Â· 59.1 ha</p><p><span>03</span>Damage: 145 buildings Â· 27.3 ha</p></div></div>
+        <div className="comparison-visual" data-reveal><BeforeAfter /></div>
+        <div className="comparison-copy" data-reveal>
+          <p className="eyebrow">See the full picture</p>
+          <h2>Measure change,<br />not just pixels.</h2>
+          <p>Run the same model across captures from different dates. FlyPix counts what remained, identifies what disappeared, and measures the affected area after a fire, flood, or construction event.</p>
+          <div className="comparison-points">
+            <div><span>01</span><p><small>Before</small><strong>412 buildings</strong><em>86.4 ha</em></p></div>
+            <div><span>02</span><p><small>After</small><strong>267 buildings</strong><em>59.1 ha</em></p></div>
+            <div className="damage-point"><span>03</span><p><small>Damage</small><strong>145 buildings</strong><em>27.3 ha</em></p></div>
+          </div>
+        </div>
       </section>
 
       <section className="speed-section ruled-section" id="automated-review" data-section="automated-review">
         <div className="section-number">FlyPix / Automated review</div>
-        <div className="speed-visuals" data-reveal>
-          <article><div className="speed-image"><video src="/assets/figma/91176b20c94d1dc4286779dce0561ca16a27b5ce.mp4" autoPlay muted loop playsInline aria-label="Manual annotation workflow" /></div><h3>Manual annotate</h3><p>Time spent: <strong>997 sec</strong></p></article>
-          <article><div className="speed-image"><video src="/assets/figma/6f93840aa60896f452d8ac14ea38eab3cc715fe1.mp4" autoPlay muted loop playsInline aria-label="AI-assisted annotation workflow" /></div><h3>AI annotate</h3><p>Time spent: <strong>3 sec</strong></p></article>
-        </div>
         <div className="speed-copy" data-reveal><p className="eyebrow">From hours to seconds</p><h2>Save 99.7% of your review time.</h2><p>AI pre-annotates every visible object across the scene. Your team verifies the result instead of tracing each object by hand.</p></div>
+        <div className="speed-visuals" data-reveal>
+          <article><div className="speed-image"><video src="/assets/figma/91176b20c94d1dc4286779dce0561ca16a27b5ce.mp4" autoPlay muted loop playsInline aria-label="Manual annotation workflow" /></div><div className="speed-card"><h3>Manual annotate</h3><p>Time spent: <strong>997 sec</strong></p></div></article>
+          <article><div className="speed-image"><video src="/assets/figma/6f93840aa60896f452d8ac14ea38eab3cc715fe1.mp4" autoPlay muted loop playsInline aria-label="AI-assisted annotation workflow" /></div><div className="speed-card"><h3>AI annotate</h3><p>Time spent: <strong>3 sec</strong></p></div></article>
+        </div>
       </section>
 
       <section className="workflow-section" id="workflow" data-section="workflow">
@@ -532,14 +541,14 @@ export default function Home() {
       <section className="news-section ruled-section" id="news" data-section="resources">
         <div className="section-number">FlyPix / Resources</div>
         <div className="news-heading" data-reveal><p className="eyebrow">From the blog</p><h2>Latest news.</h2><a className="text-link" href="https://flypix.ai/blog/">View all articles â†—</a></div>
-        <div className="news-grid">{news.map((item, index) => <a href="https://flypix.ai/blog/" className="news-card" key={item.title} data-reveal><div className="news-image"><img src={`/assets/claude/${item.image}`} alt="" /></div><div className="news-content"><span>{item.tag} Â· 0{index + 1} Â· {item.date}</span><h3>{item.title}</h3><p>{item.copy}</p><b aria-hidden="true">Read article â†—</b></div></a>)}</div>
+        <div className="news-grid">
+          {news.map((item, index) => <a href="https://flypix.ai/blog/" className="news-card" key={item.title} data-reveal><div className="news-image"><img src={`/assets/claude/${item.image}`} alt="" /></div><div className="news-content"><span>{item.tag} Â· 0{index + 1} Â· {item.date}</span><h3>{item.title}</h3><p>{item.copy}</p><b aria-hidden="true">Read article â†—</b></div></a>)}
+          {Array.from({ length: 4 }, (_, index) => <div className="news-card news-placeholder" key={`news-placeholder-${index}`} aria-hidden="true"><div className="news-image" /><div className="news-content"><i /><i /><i /></div></div>)}
+        </div>
       </section>
 
       <section className="final-cta" id="contact" data-section="final-cta" onPointerMove={(event) => { const rect = event.currentTarget.getBoundingClientRect(); event.currentTarget.style.setProperty("--cta-x", `${event.clientX - rect.left}px`); event.currentTarget.style.setProperty("--cta-y", `${event.clientY - rect.top}px`); }}>
-        <div className="cta-top"><span>FLYPIX / OPERATIONAL EARTH INTELLIGENCE</span><span>LIVE SYSTEM Â· 2026</span></div>
-        <div className="cta-copy" data-reveal><p className="eyebrow">Start your first analysis</p><h2>See the whole picture.<br />Act on what matters.</h2><p>Upload a scene and see what FlyPix AI finds, or talk to our team about a custom geospatial workflow.</p><div className="hero-actions"><a className="pill-button dark" href="https://app.flypix.ai/">Try Now â†—</a><a className="pill-button light" href="mailto:info@flypix.ai">Talk to an expert</a></div></div>
-        <div className="cta-system" aria-hidden="true"><i className="cta-ring ring-one" /><i className="cta-ring ring-two" /><i className="cta-ring ring-three" /><b className="cta-node node-one" /><b className="cta-node node-two" /><b className="cta-node node-three" /><strong>EARTH<br />DATA<br />ONLINE</strong></div>
-        <div className="cta-bottom"><span>OBJECTS Â· AREAS Â· CHANGE</span><span>MOVE Â· ADJUST Â· EXPLORE</span></div>
+        <div className="cta-copy" data-reveal><p className="eyebrow">Start your first analysis</p><h2>See the whole picture.<br />Act on what matters.</h2><p>Upload a scene and see what FlyPix AI finds, or talk to our team about a custom geospatial workflow.</p><a className="pill-button" href="https://app.flypix.ai/">Try Now</a></div>
       </section>
 
       <footer id="footer" data-section="footer">
@@ -554,4 +563,3 @@ export default function Home() {
     </main>
   );
 }
-
