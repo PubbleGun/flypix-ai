@@ -37,13 +37,30 @@ test("server-renders the complete FlyPix landing page", async () => {
   assert.match(html, /Save 99\.7% of[\s\S]*review time/i);
   assert.match(html, /What teams[\s\S]*are saying/i);
   assert.match(html, /See the whole picture[\s\S]*Act on what matters/i);
+  for (const sectionId of [
+    "hero",
+    "platform",
+    "partners",
+    "industries",
+    "change-intelligence",
+    "automated-review",
+    "workflow",
+    "custom-models",
+    "testimonials",
+    "news",
+    "contact",
+    "footer",
+  ]) {
+    assert.match(html, new RegExp(`id=["']${sectionId}["']`));
+  }
   assert.doesNotMatch(html, /Codex is working|Your site is taking shape|react-loading-skeleton/i);
 });
 
 test("keeps the interactive and responsive implementation in place", async () => {
-  const [page, css] = await Promise.all([
+  const [page, css, staticRuntime] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+    readFile(new URL("../scripts/static-preview-runtime.js", import.meta.url), "utf8"),
   ]);
 
   assert.match(page, /className="hero-globe-canvas"/);
@@ -54,6 +71,11 @@ test("keeps the interactive and responsive implementation in place", async () =>
   assert.match(page, /ArrowLeft/);
   assert.match(page, /role="slider"/);
   assert.match(page, /IntersectionObserver/);
+  assert.match(page, /headerCompact/);
+  assert.match(css, /\.site-header\.is-compact/);
+  assert.match(css, /\.section-number\s*\{[\s\S]*left:\s*50%/);
+  assert.doesNotMatch(css, /\.site-header\s*\{[^}]*box-shadow:/);
+  assert.match(staticRuntime, /classList\.toggle\("is-compact"/);
   assert.match(css, /@media \(max-width: 1020px\)/);
   assert.match(css, /@media \(max-width: 720px\)/);
   assert.match(css, /prefers-reduced-motion/);
@@ -83,3 +105,4 @@ test("ships the imagery, videos, and map used by the page", async () => {
     ),
   ]);
 });
+
