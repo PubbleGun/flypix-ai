@@ -419,7 +419,13 @@ export default function Home() {
       }}
     >
       <div className="site-pixel-field" aria-hidden="true" />
-      <header className={`site-header${headerCompact ? " is-compact" : ""}`}>
+      <header
+        className={`site-header${headerCompact ? " is-compact" : ""}`}
+        style={{
+          backdropFilter: "blur(var(--header-blur)) saturate(var(--header-saturation))",
+          WebkitBackdropFilter: "blur(var(--header-blur)) saturate(var(--header-saturation))",
+        }}
+      >
         <a href="#" className="brand" aria-label="FlyPix AI home"><Brand /></a>
         <nav className={menuOpen ? "is-open" : ""} aria-label="Main navigation">
           <a href="#platform" onClick={() => setMenuOpen(false)}>Platform</a>
