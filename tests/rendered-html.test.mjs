@@ -37,13 +37,35 @@ test("server-renders the complete FlyPix landing page", async () => {
   assert.match(html, /Save 99\.7% of[\s\S]*review time/i);
   assert.match(html, /What teams[\s\S]*are saying/i);
   assert.match(html, /See the whole picture[\s\S]*Act on what matters/i);
+  assert.equal((html.match(/class="news-card/g) ?? []).length, 4);
+  assert.doesNotMatch(html, /FlyPix \/ (Platform|Use cases|Change intelligence|Automated review|Custom models|Customer stories|Resources)|Supported by|footer-word|news-placeholder/i);
+  const finalCta = html.match(/<section class="final-cta"[\s\S]*?<\/section>/i)?.[0] ?? "";
+  assert.match(finalCta, />Try Now</i);
+  assert.doesNotMatch(finalCta, /Talk to an expert|cta-system|cta-top|cta-bottom/i);
+  for (const sectionId of [
+    "hero",
+    "platform",
+    "partners",
+    "industries",
+    "change-intelligence",
+    "automated-review",
+    "workflow",
+    "custom-models",
+    "testimonials",
+    "news",
+    "contact",
+    "footer",
+  ]) {
+    assert.match(html, new RegExp(`id=["']${sectionId}["']`));
+  }
   assert.doesNotMatch(html, /Codex is working|Your site is taking shape|react-loading-skeleton/i);
 });
 
 test("keeps the interactive and responsive implementation in place", async () => {
-  const [page, css] = await Promise.all([
+  const [page, css, staticRuntime] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+    readFile(new URL("../scripts/static-preview-runtime.js", import.meta.url), "utf8"),
   ]);
 
   assert.match(page, /className="hero-globe-canvas"/);
@@ -54,6 +76,22 @@ test("keeps the interactive and responsive implementation in place", async () =>
   assert.match(page, /ArrowLeft/);
   assert.match(page, /role="slider"/);
   assert.match(page, /IntersectionObserver/);
+  assert.match(page, /headerCompact/);
+  assert.match(page, /backdropFilter:\s*"blur\(var\(--header-blur\)\)/);
+  assert.match(page, /className="comparison-visual"/);
+  assert.match(page, /className="speed-copy"[\s\S]*className="speed-visuals"/);
+  assert.doesNotMatch(page, /className="section-number"|Supported by|news-placeholder|footer-word/);
+  assert.match(page, /className="final-cta"/);
+  assert.doesNotMatch(page, /className="cta-system"|Talk to an expert/);
+  assert.match(css, /\.site-header\.is-compact/);
+  assert.doesNotMatch(css, /\.section-number|\.news-placeholder|\.footer-word/);
+  assert.match(css, /\.comparison-visual\s*\{[^}]*aspect-ratio:\s*4\s*\/\s*3/);
+  assert.match(css, /\.news-grid\s*\{[^}]*repeat\(4/);
+  assert.match(css, /\.final-cta\s*\{[\s\S]*background:\s*#111927/);
+  assert.match(css, /\.hero-word\s*\{[^}]*width:\s*102vw[^}]*rgba\(255,255,255,\.25\)/);
+  assert.doesNotMatch(css, /\.site-header\s*\{[^}]*box-shadow:/);
+  assert.match(staticRuntime, /classList\.toggle\("is-compact"/);
+  assert.match(staticRuntime, /const finalCta = document\.querySelector\("\.final-cta"\)/);
   assert.match(css, /@media \(max-width: 1020px\)/);
   assert.match(css, /@media \(max-width: 720px\)/);
   assert.match(css, /prefers-reduced-motion/);
